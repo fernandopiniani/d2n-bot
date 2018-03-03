@@ -23,7 +23,9 @@
   },
   "homepage": "https://github.com/fernandopiniani/d2n-bot#readme",
   "dependencies": {
+    "chalk": "^2.3.2",
     "discord.js": "^11.2.1",
-    "nodemon": "^1.15.1"
+    "nodemon": "^1.17.1",
+    "splitargs": "0.0.7"
   }
 }
