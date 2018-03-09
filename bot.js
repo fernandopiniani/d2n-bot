@@ -40,7 +40,7 @@ config.modules.map((module, index) => {
         require('./bot_modules/' + module)(bot);
         console.log(`d2n-bot# Module ${chalk.bold.blue(module)} loaded [${index+1}/${config.modules.length}]`);
     }catch(err){
-        console.log(`d2n-bot# Could not load module ${chalk.bold.blue(module)}: \n ${chalk.red(err)}`);
+        console.log(`d2n-bot# Could not load module ${chalk.bold.blue(module)}: \n ${chalk.red(err.stack)}`);
     }
 });
 
