@@ -19,16 +19,16 @@ module.exports = (bot, config = null) => {
     }
 
     /**
-    * Give a tip to newcomers.
-    */
-    bot.on('guildMemberAdd', member => {
-        member.
-        member.createDM()
-        .then(dm => {
-            //Messages the player
-            dm.sendMessage(`Tip: If you're currently playing in a town type !${commandName} "My Town Name"`);
-        });
-    });
+    // * Give a tip to newcomers.
+    // */
+    // bot.on('guildMemberAdd', member => {
+    //     member.
+    //     member.createDM()
+    //     .then(dm => {
+    //         //Messages the player
+    //         dm.sendMessage(`Tip: If you're currently playing in a town type !${commandName} "Your Town Name Here" on the channel`);
+    //     });
+    // });
 
     /**
     * Creates and/or join an town's channel.
@@ -57,7 +57,7 @@ module.exports = (bot, config = null) => {
 
 
             //Try to find a role named as the town's name.
-            let townRole = guild.roles.find(role => role.name.toUpperCase() == townName.replace(' ', '-').toUpperCase())
+            let townRole = guild.roles.find(role => role.name.toUpperCase() == townName.replace(/ /g, '-').toUpperCase())
 
             //If town's channel not exists.
             if(!townRole) {
@@ -66,7 +66,7 @@ module.exports = (bot, config = null) => {
             }
 
             //Try to find a channel named as the town's name.
-            let townChannel = guild.channels.find(channel => channel.name.toUpperCase() == townName.replace(' ', '-').toUpperCase())
+            let townChannel = guild.channels.find(channel => channel.name.toUpperCase() == townName.replace(/ /g, '-').toUpperCase())
 
             //If town's channel not exists.
             if(!townChannel) {
@@ -99,14 +99,16 @@ module.exports = (bot, config = null) => {
 
     /**
     * Deletes inactive town channels.
-    * Obs: By 'town channels' I mean all channels under towns category.
+    * Note: By 'town channels' I mean all channels under towns category.
+    * Originally it was made under 'channelCreate' event, but I've found some
+    * problems with the parent
     */
-    bot.on('channelCreate', (channel) => {
+    bot.on('channelUpdate', (oldChannel, newChannel) => {
         //console.log("Channel create event triggered");
 
         try {
             //Get channel's guild
-            const guild = channel.guild;
+            const guild = newChannel.guild;
 
             //Try to find a category channel named towns
             const townsCategoryChannel = guild.channels.find(channel => channel.name.toUpperCase() === 'TOWNS'  && channel.type === 'category');
@@ -122,7 +124,7 @@ module.exports = (bot, config = null) => {
 
                         const lastMessage = messages.first();
                         // ...which last message are at least 2 days old.
-                        if(moment(lastMessage.createdAt) < moment().subtract(30, 'seconds')){
+                        if(moment(lastMessage.createdAt) < moment().subtract(2, 'days')){
 
                             // If condition is true, delete the channel, then...
                             //onsole.log(`Deleting channel ${channel.name}`);
