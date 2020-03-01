@@ -28,5 +28,8 @@
     "moment": "^2.21.0",
     "nodemon": "^1.17.1",
     "splitargs": "0.0.7"
+  },
+  "devDependencies": {
+    "standard": "^14.3.1"
   }
 }
