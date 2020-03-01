@@ -6,7 +6,7 @@
  * @param  {[type]} config [description]
  * @return {[type]}        [description]
  */
-module.exports = (bot, config) => {
+module.exports = bot => {
 
     const name = 'register';
 
