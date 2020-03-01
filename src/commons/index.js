@@ -1,3 +1,4 @@
 module.exports = {
-    commands: require('./commands')
+    commands: require('./commands'),
+    logger: require('./logger')
 }

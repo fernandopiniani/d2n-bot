@@ -8,7 +8,7 @@ const chalk = require('chalk')
 * @return {[{key: string, cmd: string, args: array }]}
 *   Returns an object with isolated command properties.
 */
-const handleCommand = (commandName, fn) => msg =>{
+const handleCommand = logger => (commandName, fn) => msg =>{
     //Trims whitespace from the beginning and end of the string.
     const messageStr = msg.content.trim();
 
@@ -23,7 +23,7 @@ const handleCommand = (commandName, fn) => msg =>{
 
         //Return the structred object
         if(cmd === commandName) {
-            console.log(`${chalk.blue(commandName)} command was called with following parameters: [${params.map(p => chalk.yellow(p))}]`)
+            logger.info(`${chalk.blue(commandName)} command was called with following parameters: [${params.map(p => chalk.yellow(p))}]`)
             return fn(msg, {cmd, params})
         }
     }

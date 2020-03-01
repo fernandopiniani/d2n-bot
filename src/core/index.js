@@ -3,6 +3,8 @@ const chalk = require('chalk');
 const commons = require('../commons')
 
 const run = config => {
+    const { logger } = commons
+
     // Initialize Discord Bot
     const bot = new discord.Client();
 
@@ -10,15 +12,15 @@ const run = config => {
     config.MODULES.forEach((module, index) => {
         try{
             require('../modules/' + module)(bot, commons);
-            console.log(`d2n-bot# Module ${chalk.bold.blue(module)} loaded [${index+1}/${config.MODULES.length}]`);
+            logger.info(`Module ${chalk.bold.blue(module)} loaded [${index+1}/${config.MODULES.length}]`);
         }catch(err){
-            console.log(`d2n-bot# Could not load module ${chalk.bold.blue(module)}: \n ${chalk.red(err.stack)}`);
+            logger.info(`Could not load module ${chalk.bold.blue(module)}: \n ${chalk.red(err.stack)}`);
         }
     });
 
     // Console log when ready.
     bot.on('ready', () => {
-        console.log(`d2n-bot# Logged in as ${chalk.yellow(bot.user.tag)}`);
+        logger.info(`Logged in as ${chalk.yellow(bot.user.tag)}`);
     });
 
     // Login
