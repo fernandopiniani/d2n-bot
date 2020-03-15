@@ -1,5 +1,6 @@
 const splitargs = require('splitargs')
 const chalk = require('chalk')
+const logger = require('./logger')
 /**
 * Command parser responsible for abstracting commands from messages.
 * @param  {[string]} msg
@@ -30,5 +31,5 @@ const handleCommand = logger => (commandName, fn) => msg => {
 }
 
 module.exports = {
-  handleCommand
+  handleCommand: handleCommand(logger)
 }

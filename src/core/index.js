@@ -8,6 +8,10 @@ const run = config => {
   // Initialize Discord Bot
   const bot = new discord.Client()
 
+  process.on('unhandledRejection', error => {
+    console.error('Unhandled promise rejection:', error)
+  })
+
   // Load Bot Modules
   config.MODULES.forEach((module, index) => {
     try {

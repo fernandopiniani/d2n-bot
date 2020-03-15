@@ -4,7 +4,8 @@
   "description": "Discord chatbot created to support Die2Nite community.",
   "main": "bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ./src/* --fix"
   },
   "repository": {
     "type": "git",
